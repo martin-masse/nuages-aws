@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
 
@@ -12,8 +13,15 @@ public class AWSSecretProvider : IAWSSecretProvider
     {
         _secretsManager = secretsManager;
     }
+
+    public async Task<T?> GetSecretAsync<T>(string secretArn) where T : class
+    {
+        var value = await GetSecretStringAsync(secretArn);
+
+        return string.IsNullOrEmpty(value) ? null : JsonSerializer.Deserialize<T>(value);
+    }
     
-    public async Task<string?> GetValueAsync(string secretArn)
+    public async Task<string?> GetSecretStringAsync(string secretArn)
     {
         if (string.IsNullOrEmpty(secretArn))
             return null;

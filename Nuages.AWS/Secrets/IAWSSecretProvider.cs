@@ -1,9 +1,10 @@
 namespace Nuages.AWS.Secrets;
 
 // ReSharper disable once InconsistentNaming
-public interface IAWSSecretProvider
+public interface IAWSSecretProvider 
 {
-    Task<string?> GetValueAsync(string secretArn);
+    Task<T?> GetSecretAsync<T>(string secretArn) where T : class; 
+    Task<string?> GetSecretStringAsync(string secretArn);
 }
 
 // ReSharper disable once InconsistentNaming
