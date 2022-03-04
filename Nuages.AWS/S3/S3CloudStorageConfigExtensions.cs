@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Nuages.Web.S3;
+namespace Nuages.AWS.S3;
 
 [ExcludeFromCodeCoverage]
 // ReSharper disable once UnusedType.Global

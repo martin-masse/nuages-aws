@@ -1,7 +1,7 @@
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
 
-namespace Nuage.AWS.Secrets;
+namespace Nuages.AWS.Secrets;
 
 // ReSharper disable once InconsistentNaming
 public interface IAWSSecretProvider
