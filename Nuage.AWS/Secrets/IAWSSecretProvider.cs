@@ -21,6 +21,9 @@ public class AWSSecretProvider : IAWSSecretProvider
     
     public async Task<string>? GetValue(string secretArn)
     {
+        if (!secretArn.StartsWith("arn:aws:secretsmanager"))
+            return secretArn;
+        
         var request = new GetSecretValueRequest
         {
             SecretId = secretArn
