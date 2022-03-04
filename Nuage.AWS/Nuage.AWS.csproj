@@ -6,11 +6,30 @@
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
         <IsPackable>true</IsPackable>
+
+        <Title>Nuages.AWS</Title>
+        <Authors>Nuages.io</Authors>
+        <Description>Nuages.AWS include AWS services helpers shared across Nuages.io projects</Description>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageIcon>nuages.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/nuages-io/nuages-aws</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
     </PropertyGroup>
-
     <ItemGroup>
-
         <PackageReference Include="AWSSDK.S3" Version="3.7.7.19" />
         <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.13" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="\" />
+        <None Include="../LICENSE">
+            <Pack>true</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+        <None Include="../nuages.png">
+            <Pack>true</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
     </ItemGroup>
 </Project>
