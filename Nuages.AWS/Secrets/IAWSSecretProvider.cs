@@ -6,7 +6,7 @@ namespace Nuages.AWS.Secrets;
 // ReSharper disable once InconsistentNaming
 public interface IAWSSecretProvider
 {
-    Task<string>? GetValue(string secretArn);
+    Task<string> GetValueAsync(string secretArn);
 }
 
 // ReSharper disable once InconsistentNaming
@@ -19,7 +19,7 @@ public class AWSSecretProvider : IAWSSecretProvider
         _secretsManager = secretsManager;
     }
     
-    public async Task<string>? GetValue(string secretArn)
+    public async Task<string> GetValueAsync(string secretArn)
     {
         if (!secretArn.StartsWith("arn:aws:secretsmanager"))
             return secretArn;
