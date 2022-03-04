@@ -13,8 +13,11 @@ public class AWSSecretProvider : IAWSSecretProvider
         _secretsManager = secretsManager;
     }
     
-    public async Task<string> GetValueAsync(string secretArn)
+    public async Task<string?> GetValueAsync(string secretArn)
     {
+        if (string.IsNullOrEmpty(secretArn))
+            return null;
+        
         if (!secretArn.StartsWith("arn:aws:secretsmanager"))
             return secretArn;
         
