@@ -27,7 +27,7 @@ public class AWSSecretProvider : IAWSSecretProvider
             return null;
         
         if (!secretArn.StartsWith("arn:aws:secretsmanager"))
-            return secretArn;
+            return null;
         
         var request = new GetSecretValueRequest
         {
