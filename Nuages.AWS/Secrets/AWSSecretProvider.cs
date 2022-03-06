@@ -46,25 +46,6 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
         return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(await reader.ReadToEndAsync()));
     }
 
-    // public void TransformSecret<T>(IConfigurationBuilder builder, IConfiguration configuration, string name) where T : class, ISecret
-    // {
-    //     var value = configuration[name];
-    //     if (!string.IsNullOrEmpty(value))
-    //     {
-    //         if (value.StartsWith("arn:aws:secretsmanager"))
-    //         {
-    //             var secret = GetSecretAsync<T>(value).Result;
-    //             if (secret != null)
-    //             {
-    //                 builder.AddInMemoryCollection(new List<KeyValuePair<string, string>>
-    //                 {
-    //                     new (name,  secret.Value)
-    //                 });
-    //             }
-    //         }
-    //     }
-    // }
-    
     public void TransformSecret(IConfigurationBuilder builder, IConfiguration configuration, string name) 
     {
         var value = configuration[name];
@@ -78,6 +59,43 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
                     builder.AddInMemoryCollection(new List<KeyValuePair<string, string>>
                     {
                         new (name,  secret)
+                    });
+                }
+            }
+        }
+    }
+    
+    public void TransformSecret(ConfigurationManager configurationManager, string name) 
+    {
+        var value = configurationManager[name];
+        if (!string.IsNullOrEmpty(value))
+        {
+            if (value.StartsWith("arn:aws:secretsmanager"))
+            {
+                var secret = GetSecretStringAsync(value).Result;
+                if (secret != null)
+                {
+                    configurationManager.AddInMemoryCollection(new List<KeyValuePair<string, string>>
+                    {
+                        new (name,  secret)
+                    });
+                }
+            }
+        }
+    }
+    
+    public void TransformSecrets(ConfigurationManager configurationManager) 
+    {
+        foreach (var item in configurationManager.AsEnumerable())
+        {
+            if (!string.IsNullOrEmpty(item.Value) && item.Value.StartsWith("arn:aws:secretsmanager"))
+            {
+                var secret = GetSecretStringAsync(item.Value).Result;
+                if (secret != null)
+                {
+                    configurationManager.AddInMemoryCollection(new List<KeyValuePair<string, string>>
+                    {
+                        new (item.Key,  secret)
                     });
                 }
             }

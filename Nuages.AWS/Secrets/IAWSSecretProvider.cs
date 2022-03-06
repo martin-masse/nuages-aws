@@ -8,6 +8,8 @@ public interface IAWSSecretProvider
 
     void TransformSecret(IConfigurationBuilder nuilder, IConfiguration configuration, string key);
     //void TransformSecret<T>(IConfigurationBuilder nuilder, IConfiguration configuration, string key) where T : class, ISecret;
+    void TransformSecret(ConfigurationManager configurationManager, string key);
+    void TransformSecrets(ConfigurationManager configurationManager);
 }
 
 // ReSharper disable once InconsistentNaming
