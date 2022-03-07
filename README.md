@@ -1,6 +1,6 @@
 # Nuages AWS
 
-Nuages.Web offers AWS Services helpers shared accross NUages projects.
+Nuages.Web offers AWS Services helpers shared across Nuages projects.
 
 
 
