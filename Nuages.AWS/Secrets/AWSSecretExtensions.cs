@@ -8,12 +8,12 @@ public static class AWSSecretExtensions
         services.AddScoped<IAWSSecretProvider, AWSSecretProvider>();
     }
 
-    public static void TransformSercrets(this ConfigurationManager configuration)
+    public static void TransformSecrets(this ConfigurationManager configuration)
     {
          AWSSecretProvider.Instance.TransformSecrets(configuration);
     }
     
-    public static void TransformSercrets(this ConfigurationManager configuration, string name)
+    public static void TransformSecrets(this ConfigurationManager configuration, string name)
     {
         AWSSecretProvider.Instance.TransformSecret(configuration, name);
     }
