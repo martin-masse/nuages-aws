@@ -14,6 +14,18 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
         _secretsManager = secretsManager ?? new AmazonSecretsManagerClient();
     }
 
+    private static AWSSecretProvider _instance = null;
+    
+    public static AWSSecretProvider Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = new AWSSecretProvider();
+
+            return _instance;
+        }
+    }
     public async Task<T?> GetSecretAsync<T>(string secretArn) where T : class
     {
         var value = await GetSecretStringAsync(secretArn);
