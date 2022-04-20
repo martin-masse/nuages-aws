@@ -101,6 +101,23 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
             }
         }
     }
+    
+    public IEnumerable<KeyValuePair<string, string>> GetSecretsValues(IConfiguration configuration) 
+    {
+        // ReSharper disable once LoopCanBeConvertedToQuery
+        foreach (var (key, value) in configuration.AsEnumerable())
+        {
+            if (!string.IsNullOrEmpty(value) && value.StartsWith("arn:aws:secretsmanager"))
+            {
+                var secret = GetSecretStringAsync(value).Result;
+                if (secret != null)
+                {
+                    yield return new KeyValuePair<string, string>(key, secret);
+                }
+            }
+        }
+    }
+
 
     public void Dispose()
     {
