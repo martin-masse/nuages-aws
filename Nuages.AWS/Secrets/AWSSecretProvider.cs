@@ -14,7 +14,7 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
         _secretsManager = secretsManager ?? new AmazonSecretsManagerClient();
     }
 
-    private static AWSSecretProvider _instance = null;
+    private static AWSSecretProvider _instance = null!;
     
     public static AWSSecretProvider Instance
     {
@@ -71,7 +71,7 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
                     builder.AddInMemoryCollection(new List<KeyValuePair<string, string>>
                     {
                         new (name,  secret)
-                    });
+                    }!);
                 }
             }
         }
@@ -90,7 +90,7 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
                     configurationManager.AddInMemoryCollection(new List<KeyValuePair<string, string>>
                     {
                         new (name,  secret)
-                    });
+                    }!);
                 }
             }
         }
@@ -108,7 +108,7 @@ public class AWSSecretProvider : IDisposable, IAWSSecretProvider
                     configurationManager.AddInMemoryCollection(new List<KeyValuePair<string, string>>
                     {
                         new (item.Key,  secret)
-                    });
+                    }!);
                 }
             }
         }
