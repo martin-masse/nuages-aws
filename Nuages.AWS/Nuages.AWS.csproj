@@ -17,8 +17,8 @@
         <RepositoryType>GitHub</RepositoryType>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AWSSDK.S3" Version="3.7.101.16" />
-        <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.100.16" />
+        <PackageReference Include="AWSSDK.S3" Version="3.7.101.44" />
+        <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.100.44" />
     </ItemGroup>
 
     <ItemGroup>
